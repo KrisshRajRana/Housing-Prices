@@ -1,5 +1,5 @@
-🏡 Predicting Housing Prices Using Linear Regression 📘 Overview of the
-Project
+🏡 Predicting Housing Prices Using Linear Regression
+📘 Overview of the Project
 
 This project aims to predict housing prices based on multiple features
 such as area, number of bedrooms, number of bathrooms, and location. It
