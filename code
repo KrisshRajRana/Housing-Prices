@@ -1,0 +1,69 @@
+# -------------------------------------------------------------
+# SIMPLE Housing Price Prediction using Linear Regression
+# -------------------------------------------------------------
+
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+import matplotlib.pyplot as plt
+
+# -------------------------------------------------------------
+# 1. Load Dataset
+# -------------------------------------------------------------
+print("Loading dataset...")
+df = pd.read_csv("housing.csv")   # Keep file in same folder
+
+print("\nDataset preview:")
+print(df.head())
+
+# -------------------------------------------------------------
+# 2. Select Features and Target
+# -------------------------------------------------------------
+X = df[["area", "bedrooms", "bathrooms"]]   # simple numeric features
+y = df["price"]
+
+# -------------------------------------------------------------
+# 3. Split Data
+# -------------------------------------------------------------
+
+X_train, X_test, y_train, y_test = train_test_split(
+X, y, test_size=0.2, random_state=10)
+
+print("\nTraining samples:", len(X_train))
+print("Testing samples:", len(X_test))
+
+# -------------------------------------------------------------
+# 4. Train Model
+# -------------------------------------------------------------
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+print("\nModel training complete.")
+
+# -------------------------------------------------------------
+# 5. Predictions
+# -------------------------------------------------------------
+y_pred = model.predict(X_test)
+
+# -------------------------------------------------------------
+# 6. Visualization
+# -------------------------------------------------------------
+plt.scatter(y_test, y_pred)
+plt.xlabel("Actual Prices")
+plt.ylabel("Predicted Prices")
+plt.title("Actual vs Predicted Prices")
+plt.grid(True)
+plt.show()
+
+# -------------------------------------------------------------
+# 7. Predict New Price Function
+# -------------------------------------------------------------
+def predict_price(area, bedrooms, bathrooms):
+    new_house = [[area, bedrooms, bathrooms]]
+    price = model.predict(new_house)[0]
+    return price
+
+# Example
+print("\nSample Prediction:")
+print("Predicted Price:", predict_price(1200, 3, 2))
+
